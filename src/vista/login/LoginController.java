@@ -95,7 +95,7 @@ public class LoginController implements Initializable {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
                 pn_principalBienvenida.setVisible(false);
-                
+
             }
         });
         tiempoTransicion.setRepeats(false);
@@ -133,9 +133,11 @@ public class LoginController implements Initializable {
                                 if (conexion.cambiarContraseña(user)) {
                                     if (cambiarContraseña(user)) {
                                         bienvenida = bienvenida();
+                                        lb_errorIniciar.setVisible(false);
                                         AnchorPane pane = FXMLLoader.load(getClass().getResource("/vista/gerente/GerenteFXML.fxml"));
                                         paneLogin.getChildren().setAll(pane);
                                         cerrarBienvendia(bienvenida);
+
                                     }
                                 } else {
                                     bienvenida = bienvenida();
@@ -149,6 +151,7 @@ public class LoginController implements Initializable {
                                 if (conexion.cambiarContraseña(user)) {
                                     if (cambiarContraseña(user)) {
                                         bienvenida = bienvenida();
+                                        lb_errorIniciar.setVisible(false);
                                         AnchorPane pane = FXMLLoader.load(getClass().getResource("/vista/Empleado/EmpleadoFXML.fxml"));
                                         paneLogin.getChildren().setAll(pane);
                                         cerrarBienvendia(bienvenida);
@@ -208,7 +211,6 @@ public class LoginController implements Initializable {
         return alerta;
     }
 
-    
     public boolean cambiarContraseña(String user) throws SQLException {
         trabajadorDAO = new TrabajadorDAO(ConexionBD.conexion);
         Alert alerta, subAlerta;
@@ -298,6 +300,10 @@ public class LoginController implements Initializable {
 
         if (tecla == KeyCode.ENTER) {
             iniciarSesion();
+        }
+        
+        if(tecla == KeyCode.BACK_SPACE){
+            lb_errorIniciar.setVisible(false);
         }
 //        boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(java.awt.event.KeyEvent.VK_CAPS_LOCK);
 //        System.out.println(isOn);

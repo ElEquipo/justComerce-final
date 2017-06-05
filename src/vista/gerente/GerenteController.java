@@ -502,7 +502,7 @@ public class GerenteController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             salir.close();
         }
     }
@@ -660,11 +660,22 @@ public class GerenteController implements Initializable {
             errorIngresar.showAndWait();
 
         } catch (SQLException ex) {
-            errorIngresar = new Alert(AlertType.ERROR);
-            errorIngresar.setTitle("Error Introducir");
-            errorIngresar.setContentText(ex.getMessage() + " " + ex.getErrorCode());
-            estiloAlerta.darleEstiloAlPanel(errorIngresar);
-            errorIngresar.showAndWait();
+
+            if (ex.getErrorCode() == 1062) {
+                errorIngresar = new Alert(AlertType.ERROR);
+                errorIngresar.setTitle("Error");
+                errorIngresar.setHeaderText("Error en DNI o NICK");
+                errorIngresar.setContentText("El DNI o el nick ya están en uso.\n"
+                        + "Por favor, elija otro.");
+                estiloAlerta.darleEstiloAlPanel(errorIngresar);
+                errorIngresar.showAndWait();
+            } else {
+                errorIngresar = new Alert(AlertType.ERROR);
+                errorIngresar.setTitle("Error Introducir");
+                errorIngresar.setContentText(ex.getMessage() + " " + ex.getErrorCode());
+                estiloAlerta.darleEstiloAlPanel(errorIngresar);
+                errorIngresar.showAndWait();
+            }
 
         } catch (Exception e) {
             errorIngresar = new Alert(AlertType.ERROR);

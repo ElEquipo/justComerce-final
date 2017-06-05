@@ -200,15 +200,25 @@ public class EmpleadoController implements Initializable {
 
     @FXML
     private void CloseAction(ActionEvent event) throws SQLException {
+        Alert salir = new Alert(AlertType.CONFIRMATION);
+        salir.setTitle("Cerrar sesion");
+        salir.setHeaderText("¿Desea cerrar la sesión?");
+        estiloAlerta.darleEstiloAlPanel(salir);
+        Optional<ButtonType> resultado = salir.showAndWait();
 
-        if (limpiarVentas(false)) {
-            try {
-                AnchorPane pane = FXMLLoader.load(getClass().getResource("/vista/login/LoginFXML.fxml"));
-                ac_empleado.getChildren().setAll(pane);
-                ConexionBD.desconectar();
-            } catch (IOException ex) {
-                Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
+        if (resultado.get() == ButtonType.OK) {
+
+            if (limpiarVentas(false)) {
+                try {
+                    AnchorPane pane = FXMLLoader.load(getClass().getResource("/vista/login/LoginFXML.fxml"));
+                    ac_empleado.getChildren().setAll(pane);
+                    ConexionBD.desconectar();
+                } catch (IOException ex) {
+                    Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } else {
+            salir.close();
         }
 
     }
