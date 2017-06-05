@@ -498,6 +498,7 @@ public class GerenteController implements Initializable {
             try {
                 AnchorPane pane = FXMLLoader.load(getClass().getResource("/vista/login/LoginFXML.fxml"));
                 ac_gerente.getChildren().setAll(pane);
+                ConexionBD.desconectar();
             } catch (IOException ex) {
                 Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
             }

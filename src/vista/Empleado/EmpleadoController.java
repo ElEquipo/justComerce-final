@@ -173,8 +173,8 @@ public class EmpleadoController implements Initializable {
         trabajador = new TrabajadorDAO(ConexionBD.conexion);
         detallesVenta = new DetallesVentaDAO(ConexionBD.conexion);
         empleadoActual = ConexionBD.actualUser;
-        bt_Perfil.setText(empleadoActual.getNombre());
-
+        bt_Perfil.setText("Dependiente: " + empleadoActual.getNombre());
+        lb_TotalTicket.setText("0");
         estiloAlerta = new Alerta();
         pn_productos.setVisible(false);
         pn_ventas.setVisible(false);
@@ -185,7 +185,6 @@ public class EmpleadoController implements Initializable {
         dp_fechaInciendia.setValue(LocalDate.now());
         tf_especificarTipoIncidencia.setVisible(false);
         actualizarTicketAtiempoReal(listaDetalles);
-        lb_TotalTicket.setText(redondear.format(venta.calcularTotal(listaDetalles)) + " €");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH':'mm':'ss");
 
@@ -206,6 +205,7 @@ public class EmpleadoController implements Initializable {
             try {
                 AnchorPane pane = FXMLLoader.load(getClass().getResource("/vista/login/LoginFXML.fxml"));
                 ac_empleado.getChildren().setAll(pane);
+                ConexionBD.desconectar();
             } catch (IOException ex) {
                 Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -429,13 +429,13 @@ public class EmpleadoController implements Initializable {
             limpiar = true;
             actualizarTicketAtiempoReal(listaDetalles);
 //            lb_TotalTicket.setText(redondear.format(venta.calcularTotal(listaDetalles)) + " €");
-            lb_TotalTicket.setText("");
+            lb_TotalTicket.setText("0 €");
         } else if (creada) {
             limpiar = true;
             listaDetalles.clear();
             actualizarTicketAtiempoReal(listaDetalles);
 //            lb_TotalTicket.setText(redondear.format(venta.calcularTotal(listaDetalles)) + " €");
-            lb_TotalTicket.setText("");
+            lb_TotalTicket.setText("0 €");
             cargarProductosParaVenta();
         } else {
             ventaEnCurso = new Alert(AlertType.CONFIRMATION);
@@ -453,7 +453,7 @@ public class EmpleadoController implements Initializable {
                 listaDetalles.clear();
                 actualizarTicketAtiempoReal(listaDetalles);
 //                lb_TotalTicket.setText(redondear.format(venta.calcularTotal(listaDetalles)) + " €");
-                lb_TotalTicket.setText("");
+                lb_TotalTicket.setText("0 €");
             }
         }
 

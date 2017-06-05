@@ -46,7 +46,7 @@ public class ConexionBD {
         return conectado;
     }
 
-    public boolean desconectar() {
+    public static boolean desconectar() {
         boolean desconectado = false;
 
         try {
