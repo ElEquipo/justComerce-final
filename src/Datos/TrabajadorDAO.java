@@ -63,7 +63,7 @@ public class TrabajadorDAO {
         psInsertar.setTime(11, Time.valueOf(trabajador.getHoraEntrada()));
         psInsertar.setTime(12, Time.valueOf(trabajador.getHoraSalida()));
         psInsertar.setInt(13, trabajador.getIdTienda());
-        psInsertar.executeQuery();
+        psInsertar.executeUpdate();
     }
 
     public int mostrarSiguienteID() throws SQLException {
