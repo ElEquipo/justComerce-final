@@ -311,7 +311,6 @@ public class GerenteController implements Initializable {
         ta_descripcionProducto.setWrapText(true);
         ta_datosTrabajador.setWrapText(true);
         bt_perfil.setText("Dependiente: " + gerenteActual.getNombre());
-
         tb_referencia.setCellValueFactory(new PropertyValueFactory<>("referencia"));
         tb_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tb_categoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
