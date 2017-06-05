@@ -310,7 +310,7 @@ public class GerenteController implements Initializable {
         rb_noLeidas.setSelected(true);
         ta_descripcionProducto.setWrapText(true);
         ta_datosTrabajador.setWrapText(true);
-        bt_perfil.setText("Dependiente: " + gerenteActual.getNombre());
+        bt_perfil.setText("Gerente: " + gerenteActual.getNombre());
         tb_referencia.setCellValueFactory(new PropertyValueFactory<>("referencia"));
         tb_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tb_categoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
@@ -641,6 +641,7 @@ public class GerenteController implements Initializable {
                         + " suerte en su nueva etapa.");
                 estiloAlerta.darleEstiloAlPanel(contratoCorrecto);
                 contratoCorrecto.showAndWait();
+                limpiarCamposContratar();
                 lb_id.setText(" " + this.trabajador.mostrarSiguienteID());
             }
 
